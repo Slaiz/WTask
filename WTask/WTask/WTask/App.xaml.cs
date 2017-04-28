@@ -11,7 +11,7 @@ namespace WTask
     [ImplementPropertyChanged]
     public partial class App : Application
     {
-        private const string DATABASE_NAME = "WTask2.db";
+        private const string DATABASE_NAME = "WTask8.db";
         private static TaskModelRepository _database;
         public static TaskModelRepository Database
         {

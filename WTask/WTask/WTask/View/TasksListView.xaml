@@ -27,38 +27,47 @@
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="2*"/>
-                                            <RowDefinition Height="3*"/>
+                                            <RowDefinition Height="2*"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="0.5*"/>
                                             <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.8*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Label Grid.Row="0"
-                                               Grid.Column="0"
-                                               Margin="3" 
-                                               Text="{Binding Name, Mode=TwoWay}" 
-                                               FontSize="Medium"
-                                               HeightRequest="25"
-                                               HorizontalOptions="Center"
-                                               VerticalOptions="Fill"
-                                               LineBreakMode="WordWrap"/>
-                                        <Label Grid.Row="1"
-                                               Grid.Column="0"
-                                               Margin="3" 
-                                               Text="{Binding Note, Mode=TwoWay}" 
-                                               FontSize="Small"
-                                               HeightRequest="15"
-                                               HorizontalOptions="Center"
-                                               VerticalOptions="Fill"
-                                               LineBreakMode="WordWrap"/>
                                         <BoxView Grid.Row="0"
                                                  Grid.RowSpan="2"
                                                  Grid.Column="0"
                                                  HorizontalOptions="Start"
                                                  VerticalOptions="Fill"
                                                  WidthRequest="10"
-                                                 Color="{Binding PriorityColor, Converter={StaticResource ColorConverter}}">
-                                        </BoxView>
+                                                 Color="{Binding PriorityColor, Converter={StaticResource ColorConverter}}"/>
+                                        <Label Grid.Row="0"
+                                               Grid.Column="1"
+                                               Grid.ColumnSpan="2"
+                                               Text="{Binding Name, Mode=TwoWay}" 
+                                               FontSize="Medium"
+                                               HeightRequest="25"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Fill"
+                                               HorizontalTextAlignment="Center"
+                                               LineBreakMode="WordWrap"/>
+                                        <Label Grid.Row="1"
+                                               Grid.Column="1"
+                                               VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="CenterAndExpand"
+                                               Text="{Binding DateStart, Mode=TwoWay, StringFormat='{0:MMMM dd, yyyy}'}"
+                                               FontSize="Small"/>
+                                        <Label Grid.Row="1"
+                                               Grid.Column="2"
+                                               VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="CenterAndExpand" 
+                                               Text="{Binding Time, Mode=TwoWay, StringFormat='{}{0:hh\\:mm}'}"
+                                               FontSize="Small"/>
+                                        <Switch Grid.Row="0"
+                                                Grid.RowSpan="2"
+                                                Grid.Column="3"
+                                                HeightRequest="30"/>
                                     </Grid>
                                 </ViewCell.View>
                             </ViewCell>

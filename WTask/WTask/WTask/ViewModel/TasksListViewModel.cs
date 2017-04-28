@@ -23,10 +23,16 @@ namespace WTask.ViewModel
             get { return _selectedTask; }
             set
             {
-                if (_selectedTask != value)
+                if (_selectedTask == value)
+                    return;
+
+                _selectedTask = value;
+
+                _selectedTask = value;
+                OnPropertyChanged(nameof(SelectedTask));
+
+                if (_selectedTask != null)
                 {
-                    _selectedTask = value;
-                    OnPropertyChanged(nameof(SelectedTask));
                     Navigation.PushAsync(new TaskView(new TaskViewModel(_selectedTask)));
                     _selectedTask = null;
                     OnPropertyChanged(nameof(SelectedTask));

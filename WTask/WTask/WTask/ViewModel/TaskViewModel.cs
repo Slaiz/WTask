@@ -23,13 +23,14 @@ namespace WTask.ViewModel
 
         public ICommand DeleteTaskCommand { get; set; }
         public ICommand SaveTaskCommand { get; set; }
-        public ICommand BackCommand { get; set; }
 
         public int Id { get; set; }
         public string Name { get; set; }
         public string Note { get; set; }
         public string Priority { get; set; }
         public string PriorityColor { get; set; }
+        public DateTime DateStart { get; set; }
+        public TimeSpan Time { get; set; }
 
         public TaskViewModel(TaskModel selectedTask)
         {
@@ -45,13 +46,21 @@ namespace WTask.ViewModel
                 Note = selectedTask.Note;
                 Priority = selectedTask.Priority;
                 PriorityColor = selectedTask.PriorityColor;
+                DateStart = selectedTask.DateStart;
+                Time = selectedTask.Time;
+            }
+            else
+            {
+                Id = 0;
+                Priority = PriorityItem.None.ToString();
+                DateStart = DateTime.Now;
+                Time = TimeSpan.Zero;
             }
 
             PriorityList = new List<string>(EnumConverter.Converter());
 
             DeleteTaskCommand = new CommandHandler(arg => DeleteTask());
             SaveTaskCommand = new CommandHandler(arg => SaveTask());
-            BackCommand = new CommandHandler(arg => Back());
         }
 
         public bool IsValid
@@ -76,6 +85,8 @@ namespace WTask.ViewModel
             TempTask.Note = Note;
             TempTask.Priority = Priority;
             TempTask.PriorityColor = PriorityColor;
+            TempTask.DateStart = DateStart;
+            TempTask.Time = Time;
 
             App.Database.SaveItem(TempTask);
 
