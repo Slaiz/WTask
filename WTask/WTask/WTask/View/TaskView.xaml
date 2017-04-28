@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WTask.View.TaskView"
+             Title="TaskView">
+    <StackLayout>
+        <StackLayout Orientation="Vertical">
+            <Label Text="Name" />
+            <Entry Text="{Binding Name, Mode=TwoWay}"/>
+            <Label Text="Note" />
+            <Entry Text="{Binding Note, Mode=TwoWay}"/>
+            <Label Text="Priority" />
+            <Picker ItemsSource="{Binding PriorityList}"
+                    SelectedItem="{Binding Priority}"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+            <Button Text="Save" Command="{Binding SaveTaskCommand}"/>
+            <Button Text="Delete" Command="{Binding DeleteTaskCommand}"/>
+            <Button Text="Back" Command="{Binding BackCommand}" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

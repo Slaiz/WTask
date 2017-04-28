@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:WTask.Converter;assembly=WTask"
+             x:Class="WTask.View.TasksListView"
+             Title="Tasks List">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:StringToColorValueConverter x:Key="ColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <ListView ItemsSource="{Binding TasksList}" 
+                          SelectedItem="{Binding SelectedTask, Mode=TwoWay}"
+                          VerticalOptions="FillAndExpand"
+                          HorizontalOptions="FillAndExpand"
+                          HasUnevenRows="True"
+                          RowHeight="50">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="3*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Row="0"
+                                               Grid.Column="0"
+                                               Margin="3" 
+                                               Text="{Binding Name, Mode=TwoWay}" 
+                                               FontSize="Medium"
+                                               HeightRequest="25"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Fill"
+                                               LineBreakMode="WordWrap"/>
+                                        <Label Grid.Row="1"
+                                               Grid.Column="0"
+                                               Margin="3" 
+                                               Text="{Binding Note, Mode=TwoWay}" 
+                                               FontSize="Small"
+                                               HeightRequest="15"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Fill"
+                                               LineBreakMode="WordWrap"/>
+                                        <BoxView Grid.Row="0"
+                                                 Grid.RowSpan="2"
+                                                 Grid.Column="0"
+                                                 HorizontalOptions="Start"
+                                                 VerticalOptions="Fill"
+                                                 WidthRequest="10"
+                                                 Color="{Binding PriorityColor, Converter={StaticResource ColorConverter}}">
+                                        </BoxView>
+                                    </Grid>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button Text="Add" Command="{Binding CreateTaskCommand}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
