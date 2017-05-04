@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Prism.Unity;
 using PropertyChanged;
 using WTask.Model;
+using WTask.View;
 using Xamarin.Forms;
 
 namespace WTask
 {
     [ImplementPropertyChanged]
-    public partial class App : Application
+    public partial class App:PrismApplication
     {
-        private const string DATABASE_NAME = "WTask8.db";
+        private const string DATABASE_NAME = "WTask9.db";
         private static TaskModelRepository _database;
         public static TaskModelRepository Database
         {
@@ -29,7 +27,7 @@ namespace WTask
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new WTask.View.TasksListView());
+            MainPage = new WTask.View.MasterPage();
         }
 
         protected override void OnStart()
@@ -40,6 +38,16 @@ namespace WTask
         protected override void OnSleep()
         {
             // Handle when your app sleeps
+        }
+
+        protected override void OnInitialized()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void RegisterTypes()
+        {
+            throw new System.NotImplementedException();
         }
 
         protected override void OnResume()

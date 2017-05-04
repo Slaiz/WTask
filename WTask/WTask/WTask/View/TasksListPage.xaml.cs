@@ -8,12 +8,12 @@ using Xamarin.Forms;
 
 namespace WTask.View
 {
-    public partial class TasksListView : ContentPage
+    public partial class TasksListPage : ContentPage
     {
-        public TasksListView()
+        public TasksListPage()
         {
             InitializeComponent();
-            BindingContext = new TasksListViewModel() { Navigation = this.Navigation};
+            BindingContext = new TasksListPageViewModel() { Navigation = this.Navigation};
         }
     }
 }

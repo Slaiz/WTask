@@ -10,11 +10,12 @@ using WTask.View;
 namespace WTask.ViewModel
 {
     [ImplementPropertyChanged]
-    public class TasksListViewModel : BaseViewModel
+    public class TasksListPageViewModel : BaseViewModel
     {
         public ObservableCollection<TaskModel> TasksList { get; set; }
 
         public ICommand CreateTaskCommand { get; set; }
+        public ICommand DoneCommand { get; set; }
 
         private TaskModel _selectedTask;
 
@@ -33,23 +34,24 @@ namespace WTask.ViewModel
 
                 if (_selectedTask != null)
                 {
-                    Navigation.PushAsync(new TaskView(new TaskViewModel(_selectedTask)));
+                    Navigation.PushAsync(new TaskPage(new TaskPageViewModel(_selectedTask)));
                     _selectedTask = null;
                     OnPropertyChanged(nameof(SelectedTask));
                 }
             }
         }
 
-        public TasksListViewModel()
+        public TasksListPageViewModel()
         {
             TasksList = new ObservableCollection<TaskModel>(App.Database.GetItems());
 
-            TaskViewModel.OnAddTask += TaskViewModelOnOnAddTask;
-            TaskViewModel.OnDeleteTask += TaskViewModelOnOnDeleteTask;
-            TaskViewModel.OnUpdateTask += TaskViewModelOnOnUpdateTask;
+            TaskPageViewModel.OnAddTask += TaskViewModelOnOnAddTask;
+            TaskPageViewModel.OnDeleteTask += TaskViewModelOnOnDeleteTask;
+            TaskPageViewModel.OnUpdateTask += TaskViewModelOnOnUpdateTask;
 
-            CreateTaskCommand = new CommandHandler(arg => CreateTask());
+            CreateTaskCommand = new DelegateCommandBase(arg => CreateTask());
         }
+
 
         private void TaskViewModelOnOnUpdateTask(TaskModel oldTaskModel, TaskModel newTaskModel)
         {
@@ -74,7 +76,7 @@ namespace WTask.ViewModel
 
         private void CreateTask()
         {
-            Navigation.PushAsync(new TaskView(new TaskViewModel(SelectedTask)));
+            Navigation.PushAsync(new TaskPage(new TaskPageViewModel(SelectedTask)));
         }
     }
 }

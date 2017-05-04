@@ -14,6 +14,7 @@ namespace WTask.Model
         public bool Done { get; set; }
         public string Priority { get; set; }
         public string PriorityColor { get; set; }
+        public string Tag { get; set; }
         public DateTime DateEnd { get; set; }
         public DateTime DateStart { get; set; }
         public TimeSpan Time { get; set; }

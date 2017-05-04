@@ -10,7 +10,7 @@ namespace WTask.Shared
 {
     public class EnumConverter
     {
-        public static List<string> Converter()
+        public static List<string> ConverterPriority()
         {
             var list = new List<string>();
 
@@ -19,6 +19,16 @@ namespace WTask.Shared
             list.Add(PriorityItem.Major.ToString());
             list.Add(PriorityItem.Medium.ToString());
             list.Add(PriorityItem.None.ToString());
+
+            return list;
+        }
+
+        public static List<string> ConverterTags()
+        {
+            var list = new List<string>();
+
+            list.Add(TagsItem.Home.ToString());
+            list.Add(TagsItem.Work.ToString());
 
             return list;
         }

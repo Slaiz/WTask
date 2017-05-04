@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:WTask.View;assembly=WTask"     
+             x:Class="WTask.View.MasterPage">
+    <MasterDetailPage.Master>
+        <ContentPage Title="Main" BackgroundColor="White">
+            <StackLayout Padding="5, 30, 5, 5">
+                <Button Text="My Task" Command="{Binding NavigateToMyTaskCommand }"/>
+                <Button Text="Add Task" Command="{Binding NavigateToAddTaskCommand}"/>
+                <Button Text="Setting" Command="{Binding NavigateToMyTaskCommand }"/>
+                <Button Text="News" Command="{Binding NavigateToMyTaskCommand }"/>
+                <Button Text="Help" Command="{Binding NavigateToMyTaskCommand }"/>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+    <MasterDetailPage.Detail>
+        <local:TasksListPage/>
+    </MasterDetailPage.Detail>
+    
+</MasterDetailPage>

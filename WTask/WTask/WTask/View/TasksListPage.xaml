@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converter="clr-namespace:WTask.Converter;assembly=WTask"
-             x:Class="WTask.View.TasksListView"
+             x:Class="WTask.View.TasksListPage"
              Title="Tasks List">
 
     <ContentPage.Resources>
@@ -44,11 +44,19 @@
                                                  Color="{Binding PriorityColor, Converter={StaticResource ColorConverter}}"/>
                                         <Label Grid.Row="0"
                                                Grid.Column="1"
-                                               Grid.ColumnSpan="2"
+                                               Text="{Binding Tag, Mode=TwoWay}" 
+                                               FontSize="Medium"
+                                               HeightRequest="25"
+                                               HorizontalOptions="Start"
+                                               VerticalOptions="Fill"
+                                               HorizontalTextAlignment="Center"
+                                               LineBreakMode="WordWrap"/>
+                                        <Label Grid.Row="0"
+                                               Grid.Column="2"
                                                Text="{Binding Name, Mode=TwoWay}" 
                                                FontSize="Medium"
                                                HeightRequest="25"
-                                               HorizontalOptions="Center"
+                                               HorizontalOptions="Start"
                                                VerticalOptions="Fill"
                                                HorizontalTextAlignment="Center"
                                                LineBreakMode="WordWrap"/>
@@ -64,9 +72,24 @@
                                                HorizontalOptions="CenterAndExpand" 
                                                Text="{Binding Time, Mode=TwoWay, StringFormat='{}{0:hh\\:mm}'}"
                                                FontSize="Small"/>
+                                        <!--<Image  Grid.Row="0"
+                                                Grid.RowSpan="2"
+                                                Grid.Column="3"
+                                                Source="Check_Box"
+                                                VerticalOptions="Fill"
+                                                HorizontalOptions="Fill"
+                                                HeightRequest="30">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding DoneCommand}" 
+                                                                      CommandParameter="{Binding ElementName=TasksList, Path=SelectedItem}"/>
+                                            </Image.GestureRecognizers>
+                                            </Image>-->
                                         <Switch Grid.Row="0"
                                                 Grid.RowSpan="2"
                                                 Grid.Column="3"
+                                                VerticalOptions="Fill"
+                                                HorizontalOptions="Fill"
+                                                BindingContext="{Binding Done}"
                                                 HeightRequest="30"/>
                                     </Grid>
                                 </ViewCell.View>

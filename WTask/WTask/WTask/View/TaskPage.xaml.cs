@@ -6,13 +6,13 @@ namespace WTask.View
 {
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TaskView : ContentPage
+    public partial class TaskPage : ContentPage
     {
-        public TaskView(TaskViewModel taskViewModel)
+        public TaskPage(TaskPageViewModel taskPageViewModel)
         {
             InitializeComponent();
-            taskViewModel.Navigation = this.Navigation;
-            BindingContext = taskViewModel;
+            taskPageViewModel.Navigation = this.Navigation;
+            BindingContext = taskPageViewModel;
         }
     }
 }

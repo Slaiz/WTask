@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using PropertyChanged;
 using Shared;
@@ -11,7 +12,7 @@ using Xamarin.Forms;
 namespace WTask.ViewModel
 {
     [ImplementPropertyChanged]
-    public class TaskViewModel:BaseViewModel
+    public class TaskPageViewModel:BaseViewModel
     {
         public static event EventHandler<TaskModel> OnAddTask;
         public static event EventHandler<TaskModel> OnDeleteTask;
@@ -20,6 +21,7 @@ namespace WTask.ViewModel
         public TaskModel TempTask { get; private set; }
         public TaskModel OldTask { get; private set; }
         public List<string> PriorityList { get; set; }
+        public List<string> TagsList { get; set; }
 
         public ICommand DeleteTaskCommand { get; set; }
         public ICommand SaveTaskCommand { get; set; }
@@ -27,12 +29,14 @@ namespace WTask.ViewModel
         public int Id { get; set; }
         public string Name { get; set; }
         public string Note { get; set; }
+        public bool Done { get; set; }
         public string Priority { get; set; }
         public string PriorityColor { get; set; }
+        public string Tag { get; set; }
         public DateTime DateStart { get; set; }
         public TimeSpan Time { get; set; }
 
-        public TaskViewModel(TaskModel selectedTask)
+        public TaskPageViewModel(TaskModel selectedTask)
         {
             TempTask = new TaskModel();
 
@@ -44,23 +48,27 @@ namespace WTask.ViewModel
 
                 Name = selectedTask.Name;
                 Note = selectedTask.Note;
+                Done = selectedTask.Done;
                 Priority = selectedTask.Priority;
                 PriorityColor = selectedTask.PriorityColor;
+                Tag = selectedTask.Tag;
                 DateStart = selectedTask.DateStart;
                 Time = selectedTask.Time;
             }
             else
             {
                 Id = 0;
+                Done = false;
                 Priority = PriorityItem.None.ToString();
                 DateStart = DateTime.Now;
                 Time = TimeSpan.Zero;
             }
 
-            PriorityList = new List<string>(EnumConverter.Converter());
+            PriorityList = new List<string>(EnumConverter.ConverterPriority());
+            TagsList = new List<string>(EnumConverter.ConverterTags());
 
-            DeleteTaskCommand = new CommandHandler(arg => DeleteTask());
-            SaveTaskCommand = new CommandHandler(arg => SaveTask());
+            DeleteTaskCommand = new DelegateCommandBase(arg => DeleteTask());
+            SaveTaskCommand = new DelegateCommandBase(arg => SaveTask());
         }
 
         public bool IsValid
@@ -81,10 +89,13 @@ namespace WTask.ViewModel
         {
             SetPriorityColor();
 
+            TempTask.Id = Id;
             TempTask.Name = Name;
             TempTask.Note = Note;
+            TempTask.Done = Done;
             TempTask.Priority = Priority;
             TempTask.PriorityColor = PriorityColor;
+            TempTask.Tag = Tag;
             TempTask.DateStart = DateStart;
             TempTask.Time = Time;
 
